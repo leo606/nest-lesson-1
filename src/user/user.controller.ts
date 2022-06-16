@@ -7,6 +7,7 @@ import {
   HttpCode,
   HttpStatus,
   Res,
+  Patch,
 } from '@nestjs/common';
 
 @Controller('user')
@@ -29,5 +30,10 @@ export class UserController {
   @HttpCode(HttpStatus.NO_CONTENT)
   create(@Body() user) {
     return { user };
+  }
+
+  @Patch(':id')
+  update(@Param() params, @Body() body) {
+    return { message: `user id ${params.id} updated`, newUser: body };
   }
 }
