@@ -6,13 +6,18 @@ import {
   Body,
   HttpCode,
   HttpStatus,
+  Res,
 } from '@nestjs/common';
 
 @Controller('user')
 export class UserController {
   @Get('list')
-  getAll() {
-    return [...Array(3)].map((_value, index) => ({ id: index, name: 'name' }));
+  getAll(@Res() res) {
+    const users = [...Array(3)].map((_value, index) => ({
+      id: index,
+      name: 'name',
+    }));
+    return res.status(418).json(users);
   }
 
   @Get(':id')
