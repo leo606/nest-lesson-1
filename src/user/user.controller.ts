@@ -8,6 +8,7 @@ import {
   HttpStatus,
   Res,
   Patch,
+  Delete,
 } from '@nestjs/common';
 
 @Controller('user')
@@ -35,5 +36,10 @@ export class UserController {
   @Patch(':id')
   update(@Param() params, @Body() body) {
     return { message: `user id ${params.id} updated`, newUser: body };
+  }
+
+  @Delete(':id')
+  remove(@Param('id') id) {
+    return { message: `user id ${id} deleted` };
   }
 }
