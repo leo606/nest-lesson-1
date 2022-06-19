@@ -10,9 +10,12 @@ import {
   Patch,
   Delete,
 } from '@nestjs/common';
+import { UserService } from './user.service';
 
 @Controller('user')
 export class UserController {
+  constructor(private readonly userService: UserService) {}
+
   @Get('list')
   getAll(@Res() res) {
     const users = [...Array(3)].map((_value, index) => ({
