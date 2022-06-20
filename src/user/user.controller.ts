@@ -6,7 +6,6 @@ import {
   Body,
   HttpCode,
   HttpStatus,
-  Res,
   Patch,
   Delete,
 } from '@nestjs/common';
@@ -17,32 +16,28 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Get('list')
-  getAll(@Res() res) {
-    const users = [...Array(3)].map((_value, index) => ({
-      id: index,
-      name: 'name',
-    }));
-    return res.status(418).json(users);
+  getAll() {
+    return this.userService.findAll();
   }
 
   @Get(':id')
-  getById(@Param('id') id: number) {
-    return { id, name: 'name' };
+  getById(@Param('id') id: string) {
+    return this.userService.findOne(+id);
   }
 
   @Post()
   @HttpCode(HttpStatus.NO_CONTENT)
   create(@Body() user) {
-    return { user };
+    return this.userService.create(user);
   }
 
   @Patch(':id')
-  update(@Param() params, @Body() body) {
-    return { message: `user id ${params.id} updated`, newUser: body };
+  update(@Param('id') id, @Body() body) {
+    this.userService.update(+id, body);
   }
 
   @Delete(':id')
   remove(@Param('id') id) {
-    return { message: `user id ${id} deleted` };
+    return this.userService.remove(+id);
   }
 }

@@ -11,7 +11,7 @@ export class UserService {
       age: 12,
     },
     {
-      id: 1,
+      id: 2,
       name: 'abc',
       lastName: 'def',
       age: 13,
@@ -32,7 +32,9 @@ export class UserService {
 
   update(id: number, updateUserDto: any) {
     const userToUptadeIndex = this.users.findIndex((user) => user.id === id);
-    this.users[userToUptadeIndex] = updateUserDto;
+    if (userToUptadeIndex >= 0) {
+      this.users[userToUptadeIndex] = updateUserDto;
+    }
   }
 
   remove(id: number) {
