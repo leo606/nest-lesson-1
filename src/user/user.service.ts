@@ -9,12 +9,14 @@ export class UserService {
       name: 'foo',
       lastName: 'bar',
       age: 12,
+      technologies: ['java', 'javascript'],
     },
     {
       id: 2,
       name: 'abc',
       lastName: 'def',
       age: 13,
+      technologies: ['mysql', 'javascript'],
     },
   ];
 

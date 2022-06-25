@@ -30,7 +30,6 @@ export class UserController {
   @Post()
   @HttpCode(HttpStatus.NO_CONTENT)
   create(@Body() createUserDto: CreateUserDto) {
-    console.log(createUserDto);
     return this.userService.create(createUserDto);
   }
 
