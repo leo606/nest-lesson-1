@@ -1,8 +1,14 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 import { User } from './entities/user.entity';
 
 @Injectable()
 export class UserService {
+  constructor(
+    @InjectRepository(User)
+    private userRepository: Repository<User>,
+  ) {}
   private users: User[] = [
     {
       id: 1,
@@ -20,8 +26,9 @@ export class UserService {
     },
   ];
 
-  findAll() {
-    return this.users;
+  findAll(): Promise<User[]> {
+    return this.userRepository.find();
+    // return this.users;
   }
 
   findOne(id: number) {
