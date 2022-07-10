@@ -1,3 +1,4 @@
+import { DATA_SOURCE } from 'src/constants';
 import { DataSource, DataSourceOptions } from 'typeorm';
 
 const POSTGRES_DATA: DataSourceOptions = {
@@ -7,13 +8,13 @@ const POSTGRES_DATA: DataSourceOptions = {
   username: 'postgres',
   password: 'docker',
   database: 'postgres',
-  entities: [__dirname + '/**/*.entity{.ts,.js}'],
+  entities: [__dirname + '/../**/*.entity{.ts,.js}'],
   synchronize: true,
 };
 
 export const databaseProviders = [
   {
-    provide: 'DATA_SOURCE',
+    provide: DATA_SOURCE,
     useFactory: async () => new DataSource(POSTGRES_DATA).initialize(),
   },
 ];
