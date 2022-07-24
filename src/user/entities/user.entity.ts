@@ -1,4 +1,11 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  JoinTable,
+  ManyToMany,
+} from 'typeorm';
+import { Technology } from './technology.entity';
 
 @Entity('users')
 export class User {
@@ -14,6 +21,9 @@ export class User {
   @Column()
   age: number;
 
-  @Column('json', { nullable: true })
-  technologies: string[];
+  @JoinTable()
+  @ManyToMany(() => Technology, (technology) => technology.users, {
+    cascade: true,
+  })
+  technologies: Technology[];
 }
