@@ -1,10 +1,4 @@
-import {
-  HttpException,
-  HttpStatus,
-  Inject,
-  Injectable,
-  NotFoundException,
-} from '@nestjs/common';
+import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { USER_REPOSITORY } from 'src/constants';
 import { Repository } from 'typeorm';
 import { User } from './entities/user.entity';
@@ -15,7 +9,6 @@ export class UserService {
     @Inject(USER_REPOSITORY)
     private userRepository: Repository<User>,
   ) {}
-  private users: User[] = [];
 
   findAll(): Promise<User[]> {
     return this.userRepository.find();
