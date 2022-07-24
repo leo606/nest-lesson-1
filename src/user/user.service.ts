@@ -16,12 +16,15 @@ export class UserService {
     private technologyRepository: Repository<Technology>,
   ) {}
 
-  findAll(): Promise<User[]> {
-    return this.userRepository.find();
+  async findAll(): Promise<User[]> {
+    return this.userRepository.find({ relations: ['technologies'] });
   }
 
   async findOne(id: number) {
-    const user = await this.userRepository.findOne({ where: { id } });
+    const user = await this.userRepository.findOne({
+      where: { id },
+      relations: ['technologies'],
+    });
     if (!user) {
       throw new NotFoundException(`user id ${id} not found`);
     }
