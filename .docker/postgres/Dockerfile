@@ -1,3 +1,3 @@
-FROM postgres:14-alpine
+FROM postgres
 
 RUN usermod -u 1000 postgres

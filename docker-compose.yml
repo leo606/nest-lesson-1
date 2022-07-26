@@ -1,0 +1,38 @@
+version: "3"
+
+services:
+  app:
+    build: .
+    entrypoint: .docker/entrypoint.sh
+    container_name: nest-lessons-app
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/home/node/app
+    depends_on:
+      - db
+  
+  db:
+    build: .docker/postgres
+    container_name: nest-lessons-postgress-db
+    restart: always
+    tty: true
+    ports:
+      - "5432:5432"
+    volumes:
+      - .docker/postgres/dbdata:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=docker
+      - POSTGRES_DB=nestjslessons
+  
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: nest-lessons-pgadmin
+    tty: true
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=e@e.com
+      - PGADMIN_DEFAULT_PASSWORD=admin
+    ports:
+      - "8080:80"
+    depends_on:
+      - db
