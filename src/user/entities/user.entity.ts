@@ -4,13 +4,16 @@ import {
   PrimaryGeneratedColumn,
   JoinTable,
   ManyToMany,
+  BeforeInsert,
+  CreateDateColumn,
 } from 'typeorm';
 import { Technology } from './technology.entity';
+import { v4 as uuidv4 } from 'uuid';
 
 @Entity('users')
 export class User {
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
   @Column()
   name: string;
@@ -26,4 +29,15 @@ export class User {
     cascade: true,
   })
   technologies: Technology[];
+
+  @CreateDateColumn({ type: 'timestamp' })
+  createdAt: Date;
+
+  @BeforeInsert()
+  generateUuid() {
+    if (this.id) {
+      return;
+    }
+    this.id = uuidv4();
+  }
 }

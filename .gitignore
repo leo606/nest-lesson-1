@@ -37,3 +37,4 @@ lerna-debug.log*
 
 # database
 .docker/postgres/dbdata
+.vscode/settings.json

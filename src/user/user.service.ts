@@ -20,7 +20,7 @@ export class UserService {
     return this.userRepository.find({ relations: ['technologies'] });
   }
 
-  async findOne(id: number) {
+  async findOne(id: string) {
     const user = await this.userRepository.findOne({
       where: { id },
       relations: ['technologies'],
@@ -45,7 +45,7 @@ export class UserService {
     return await this.userRepository.save(user);
   }
 
-  async update(id: number, updateUserDto: UpdateUserDto) {
+  async update(id: string, updateUserDto: UpdateUserDto) {
     const technologies =
       updateUserDto.technologies &&
       (await Promise.all(
@@ -67,7 +67,7 @@ export class UserService {
     return this.userRepository.save(user);
   }
 
-  async remove(id: number) {
+  async remove(id: string) {
     const user = await this.userRepository.findOne({ where: { id } });
 
     if (!user) {

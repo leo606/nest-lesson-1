@@ -11,6 +11,7 @@ const POSTGRES_DATA: DataSourceOptions = {
   database: process.env.DB_DATABASE,
   entities: [`${__dirname}/../**/*.entity.{ts,js}`],
   migrations: [`${__dirname}/migrations/*.{ts,js}`],
+  synchronize: false,
 };
 
 export const databaseProviders = [
