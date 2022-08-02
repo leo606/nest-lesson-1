@@ -24,7 +24,7 @@ export class User {
   @Column()
   age: number;
 
-  @JoinTable()
+  @JoinTable({ name: 'users_technologies' })
   @ManyToMany(() => Technology, (technology) => technology.users, {
     cascade: true,
   })
