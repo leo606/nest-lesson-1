@@ -12,7 +12,7 @@ export class createUserIdColumnInUserTechnologiesTable1659481266951
     await queryRunner.addColumn(
       'users_technologies',
       new TableColumn({
-        name: 'userId',
+        name: 'usersId',
         type: 'uuid',
       }),
     );
@@ -21,7 +21,7 @@ export class createUserIdColumnInUserTechnologiesTable1659481266951
       'users_technologies',
       new TableForeignKey({
         name: 'user_technologies_user',
-        columnNames: ['userId'],
+        columnNames: ['usersId'],
         referencedColumnNames: ['id'],
         referencedTableName: 'users',
       }),
@@ -34,6 +34,6 @@ export class createUserIdColumnInUserTechnologiesTable1659481266951
       'user_technologies_user',
     );
 
-    await queryRunner.dropColumn('users_technologies', 'userId');
+    await queryRunner.dropColumn('users_technologies', 'usersId');
   }
 }
